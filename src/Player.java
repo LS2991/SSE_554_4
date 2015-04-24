@@ -9,6 +9,7 @@ public class Player {
 	private double xPos, yPos;
 	private int dX = 3, dY = 3, score = 0;
 	private static final int xSize = 15, ySize = 15;
+	public int health = 100;
 	
 	public Player(Rectangle2D environment) {
 		
@@ -65,4 +66,5 @@ public class Player {
 	public void incrementScore() {
 		score ++;
 	}
+	
 }
