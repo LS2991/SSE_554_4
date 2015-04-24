@@ -78,7 +78,8 @@ public class GameComponent extends JPanel{
 		}
 	}
 	
-	public Dimension getPreferedSize() {
+	@Override
+	public Dimension getPreferredSize() {
 		return new Dimension(defaultWidth, defaultHeight);
 	}
 	

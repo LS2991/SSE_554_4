@@ -1,7 +1,8 @@
 
 public class CaesarCipher {
 	
-	private static final int ASCII_MAX = 90;
+	private static final int ASCII_MAX = 126;
+	private static final int ASCII_MIN = 33;
 	private static int shift;
 	
 	
@@ -9,7 +10,7 @@ public class CaesarCipher {
 		this.shift = shift;
 	}
 	//Limited to Ascii only
-	public static String encrypt(String input) {
+	public String encrypt(String input) {
 		String encrypted = "";
 		for(int x = 0; x < input.length(); x++) {
 			char c = input.charAt(x);
@@ -26,15 +27,15 @@ public class CaesarCipher {
 		return encrypted;
 	}
 	
-	public static String decrypt(String encrypted) {
+	public String decrypt(String encrypted) {
 		String decrypted = "";
 		for(int x = 0; x < encrypted.length(); x++) {
 			char c = encrypted.charAt(x);
-			if(c + shift > ASCII_MAX) {
-				c -= shift;
+			if(c + (shift * 2) > ASCII_MAX) {
+				c += shift;
 			}
 			else {
-				c += shift;
+				c -= shift;
 			}
 			
 			decrypted += c;

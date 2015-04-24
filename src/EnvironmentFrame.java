@@ -13,14 +13,30 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 
-public class EnvironmentFrame extends JFrame {
+public class EnvironmentFrame extends JFrame implements ActionListener, Observer {
 
 	public GameComponent comp;
-	
+	public LoginFrame login;
+	Container contentPane;
+	JButton existingB, newB;
+	boolean authenticated = false;
 	public EnvironmentFrame() {
 		comp = new GameComponent();
 		comp.setFocusable(true);
 		setFocusable(true);
+		contentPane = getContentPane();
+		login = new LoginFrame();
+		
+		login.registerObserver(this);
+		
+		existingB = login.getExistingButton();
+		existingB.addActionListener(this);
+		
+		newB = login.getNewButton();
+		newB.addActionListener(this);
+		
+		//login.setFocusable(true);
+		//setFocusable(true);
 		
 		InputMap im = comp.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
 		ActionMap am = comp.getActionMap();
@@ -42,22 +58,10 @@ public class EnvironmentFrame extends JFrame {
 		am.put("Enter", new MovementAction("Enter"));
 		
 		
-		add(comp, BorderLayout.CENTER);
-		setPreferredSize(comp.getPreferedSize());
-		JPanel buttonPanel = new JPanel();
+		//add(comp, BorderLayout.CENTER);
+		add(login, BorderLayout.CENTER);
 		
-		addButton(buttonPanel, "Start", new ActionListener() {
-			boolean started = false;
-			public void actionPerformed(ActionEvent e) {
-				if (!started) {
-					addPlayer();
-					addObjects();
-					started = true;
-				}
-			}
-		});
 		
-		add(buttonPanel, BorderLayout.SOUTH);
 		
 		pack();
 	}
@@ -95,5 +99,46 @@ public class EnvironmentFrame extends JFrame {
 	public GameComponent getGameComponent() {
 		return comp;
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("frame");
+		
+		String action = e.getActionCommand();
+		if(action.equals("existing")) {
+			setPane(comp);
+			
+			JPanel buttonPanel = new JPanel();
+			
+			addButton(buttonPanel, "Start", new ActionListener() {
+				boolean started = false;
+				public void actionPerformed(ActionEvent e) {
+					if (!started) {
+						addPlayer();
+						addObjects();
+						started = true;
+					}
+				}
+			});
+			
+			add(buttonPanel, BorderLayout.SOUTH);
+		}
+	}
+	
+public void setPane(JPanel panel) {
+        
+        contentPane.removeAll();
+        contentPane.add(panel, BorderLayout.CENTER);
+        panel.setFocusable(true);
+		setFocusable(true);
+		setPreferredSize((comp.getPreferredSize()));
+        pack();
+        setVisible(true);
+	}
+
+@Override
+public void update(boolean authenticated) {
+	this.authenticated = authenticated;
+}
 
 }
