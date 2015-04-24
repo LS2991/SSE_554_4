@@ -6,7 +6,7 @@ public class ObjectRunnable implements Runnable {
 	private GameComponent comp;
 	private ArrayList<Object> objects;
 	private Object object;
-	boolean play = true, collision = false;
+	boolean play = true, collision = false, playerhit= false;
 	int health;
 
 	public ObjectRunnable(GameComponent comp) {
@@ -45,6 +45,19 @@ public class ObjectRunnable implements Runnable {
 							collision = true;
 							break;
 						}
+					}
+					
+					if(object.intersects2(comp.getPlayer().getShape(),object.getShape()))
+					{
+						playerhit = true;
+					}
+					
+					if(playerhit)
+					{
+						comp.getPlayer().health = comp.getPlayer().health-1;
+						System.out.println(comp.getPlayer().health);
+						playerhit = false;
+						break;
 					}
 					if(collision)
 						break;

@@ -1,5 +1,7 @@
 import java.awt.Graphics2D;
 import java.awt.Color;
+import java.awt.Shape;
+import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
@@ -137,9 +139,15 @@ public class SmallerObject {
 		}	
 	}
 
-	public boolean intersects(Rectangle2D obj) {
-		if(getShape().intersects(obj))
+	public boolean intersects(Rectangle2D ellipse2d) {
+		if(getShape().intersects(ellipse2d))
 			return true;
 		return false;
+	}
+
+		public boolean intersects2(Shape shapeA, Shape shapeB) {
+			Area areaA = new Area(shapeA);
+			areaA.intersect(new Area(shapeB));
+			return !areaA.isEmpty();
 	}
 }

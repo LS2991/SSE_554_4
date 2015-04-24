@@ -6,7 +6,7 @@ public class SmallerObjectRunnable implements Runnable {
 	private GameComponent comp;
 	private ArrayList<SmallerObject> objects;
 	private SmallerObject object;
-	boolean play = true, collision = false;
+	boolean play = true, collision = false, playerhit = false;
 	int health;
 
 	public SmallerObjectRunnable(GameComponent comp, double xpos, double ypos, int side, int num) {
@@ -45,6 +45,19 @@ public class SmallerObjectRunnable implements Runnable {
 							collision = true;
 							break;
 						}
+					}
+					
+					if(object.intersects2(comp.getPlayer().getShape(),object.getShape()))
+					{
+						playerhit = true;
+					}
+					
+					if(playerhit)
+					{
+						comp.getPlayer().health = comp.getPlayer().health-1;
+						System.out.println(comp.getPlayer().health);
+						playerhit = false;
+						break;
 					}
 					if(collision)
 						break;
