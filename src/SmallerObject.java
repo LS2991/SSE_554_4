@@ -4,45 +4,34 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 
-public class Object {
+public class SmallerObject {
 	
 	private double xPos, yPos;
 	boolean left,up;
 	private int dX = 1, dY = 1;
-	private static final int xSize = 15, ySize = 15;
+	private static final int xSize = 7, ySize = 7;
 	private int side;
 	
-	public Object(Rectangle2D environment) {
+	public SmallerObject(Rectangle2D environment,double xPos, double yPos,int side,int num) {
 		side = (int) (Math.random()*3);
-		if(side == 0)
-		{
-			xPos = Math.random()*environment.getMaxX()+20;
-			if(xPos > (environment.getMaxX()/2))
-			    left = true;
-			else
-				left = false;
-			yPos = environment.getMinY()+20;
-		}
+		this.side = side;
+		this.xPos = xPos;
+		this.yPos = yPos;
 		
-		else if(side == 1)
+		if(num == 1)
 		{
-			xPos = environment.getMaxX()-20;
-			yPos = Math.random()*environment.getMaxY();
-			if(yPos > (environment.getMaxX()/2))
-			    up = true;
+			if(side == 1)
+				up = true;
 			else
-				up = false;
+				left = true;
 		}
-		
 		else
 		{
-			xPos = Math.random()*environment.getMaxX()+20;
-			yPos = environment.getMaxY()-20;
-			if(xPos > (environment.getMaxX()/2))
-				left = true;
+			if(side ==1)
+				up = false;
 			else
 				left = false;
-		}	
+		}
 	}
 	
 	public void move(Rectangle2D environment) {	
@@ -152,10 +141,5 @@ public class Object {
 		if(getShape().intersects(obj))
 			return true;
 		return false;
-	}
-
-	public int getSide() {
-		// TODO Auto-generated method stub
-		return side;
 	}
 }

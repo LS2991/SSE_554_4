@@ -18,6 +18,7 @@ public class GameComponent extends JPanel{
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	private Object object;
 	private ArrayList<Object> objects = new ArrayList<Object>();
+	private ArrayList<SmallerObject> smallobjects = new ArrayList<SmallerObject>();
 	private Menu menu = new Menu();
 	private boolean showScore = false;
 
@@ -38,6 +39,10 @@ public class GameComponent extends JPanel{
 		objects.add(obj);
 	}
 	
+	public void addSmallerObject(SmallerObject smallobject) 
+	{
+		smallobjects.add(smallobject);
+	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -50,6 +55,10 @@ public class GameComponent extends JPanel{
 		
 		if(!objects.isEmpty())
 			for(Object obj : objects)
+				obj.paintObject(g2);
+		
+		if(!smallobjects.isEmpty())
+			for(SmallerObject obj : smallobjects)
 				obj.paintObject(g2);
 				
 		if(!projectiles.isEmpty()) { 
@@ -93,6 +102,12 @@ public class GameComponent extends JPanel{
 	{
 		return objects;
 	}
+	
+	public ArrayList<SmallerObject> getSmallerObjects() 
+	{
+		return smallobjects;
+	}
+
 	/////////////////////////////////////////
 	public void startDrawingMenu() {
 		menu.startDrawing();
@@ -111,4 +126,7 @@ public class GameComponent extends JPanel{
 	public void toggleScore() {
 		showScore = !showScore;
 	}
+
+
+
 }

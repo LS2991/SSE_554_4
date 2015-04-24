@@ -1,19 +1,19 @@
 import java.util.ArrayList;
 
 
-public class ObjectRunnable implements Runnable {
+public class SmallerObjectRunnable implements Runnable {
 
 	private GameComponent comp;
-	private ArrayList<Object> objects;
-	private Object object;
+	private ArrayList<SmallerObject> objects;
+	private SmallerObject object;
 	boolean play = true, collision = false;
 	int health;
 
-	public ObjectRunnable(GameComponent comp) {
-		object = new Object(comp.getBounds());
-		comp.addObject(object);
+	public SmallerObjectRunnable(GameComponent comp, double xpos, double ypos, int side, int num) {
+		object = new SmallerObject(comp.getBounds(),xpos,ypos,side,num);
+		comp.addSmallerObject(object);
 		comp.paint(comp.getGraphics());
-		objects = comp.getObjects();
+		objects = comp.getSmallerObjects();
 		
 		this.comp = comp;
 	}
@@ -60,14 +60,6 @@ public class ObjectRunnable implements Runnable {
 		}
 		if(collision)
 		{
-			//health--;
-			comp.getPlayer().incrementScore();
-			for(int i = 1; i < 3; i++)
-			{
-				Runnable r = new SmallerObjectRunnable(comp,object.getXPos(),object.getYPos(),object.getSide(),i);
-				Thread t = new Thread(r);
-				t.start();
-			}
 			objects.remove(object);
 			play = false;
 			break;
@@ -78,10 +70,9 @@ public class ObjectRunnable implements Runnable {
 			object.reset(comp.getBounds());
 		}
 	}
-		
 }
 	
-	public Object getObject() 
+	public SmallerObject getObject() 
 	{
 		return object;
 	}

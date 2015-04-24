@@ -91,6 +91,7 @@ public class EnvironmentFrame extends JFrame {
 		comp.paint(comp.getGraphics());
 	}
 	
+	
 	public GameComponent getGameComponent() {
 		return comp;
 	}
