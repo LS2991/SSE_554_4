@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 
+@SuppressWarnings("serial")
 public class GameComponent extends JPanel{
 	
 	private static final int defaultWidth = 600;
