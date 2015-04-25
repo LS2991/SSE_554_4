@@ -123,26 +123,26 @@ public class GameUnitTest {
 		
 		CaesarCipher cc = new CaesarCipher(3);
 		String in = "ABC";
-		String in2 = "xyz";
+		String in2 = "{|}";
 		
 		String encrypted = cc.encrypt(in);
 		String encrypted2 = cc.encrypt(in2);
-		
+		System.out.println(encrypted2);
 		assertTrue(encrypted.equals("DEF"));
-		assertTrue(encrypted2.equals("uvw"));
+		assertTrue(encrypted2.equals("~!\""));
 	}
 	
 	public void decryptTest() {
 		
 		CaesarCipher cc = new CaesarCipher(3);
 		String enc = "DEF";
-		String enc2 = "uvw";
+		String enc2 = "~!\"";
 		
 		String dec = cc.decrypt(enc);
 		String dec2 = cc.decrypt(enc2);
 		
 		assertTrue(dec.equals("ABC"));
-		assertTrue(dec2.equals("xyz"));
+		assertTrue(dec2.equals("{|}"));
 	}
 
 }

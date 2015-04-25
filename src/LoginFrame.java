@@ -199,6 +199,11 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 						showSaveFileDialog();
 					}
 					
+					else if(!(new File((path = br.readLine())).exists())) {
+						JOptionPane.showMessageDialog(this, "Directory does not exist. Please select a valid directory.");
+						showSaveFileDialog();
+					}
+					
 					if(!username.getText().equals("") && !password.getText().equals("")) {
 						//CaesarCipher cc = new CaesarCipher(shift);
 						user = new File(path + "\\" + username.getText() + ".txt");

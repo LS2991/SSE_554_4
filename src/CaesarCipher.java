@@ -15,7 +15,8 @@ public class CaesarCipher {
 		for(int x = 0; x < input.length(); x++) {
 			char c = input.charAt(x);
 			if(c + shift > ASCII_MAX){
-				c -= shift;
+				int delta = ((c + shift) - (ASCII_MAX)) - 1;
+				c = (char) (ASCII_MIN + delta);
 			}
 			else {
 				c += shift;
@@ -31,8 +32,9 @@ public class CaesarCipher {
 		String decrypted = "";
 		for(int x = 0; x < encrypted.length(); x++) {
 			char c = encrypted.charAt(x);
-			if(c + (shift * 2) > ASCII_MAX) {
-				c += shift;
+			if(c - shift < ASCII_MIN) {
+				int delta = (ASCII_MIN - (c - shift)) - 1;
+				c = (char) (ASCII_MAX - delta);
 			}
 			else {
 				c -= shift;
