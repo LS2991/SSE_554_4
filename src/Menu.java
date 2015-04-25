@@ -17,14 +17,15 @@ public class Menu {
 		createMenuList();
 	}
 
-	public Menu(int x, int y, int w, int h) {
+	public Menu(int x, int y, int w, int h, ArrayList<String> list) {
 		xPos = x;
 		yPos = y;
 		width = w;
 		height = h;
 		selected = 0;
 		
-		createMenuList();
+		menuList = list;
+		maxOptions = menuList.size();
 	}
 	
 	private void createMenuList() {

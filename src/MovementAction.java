@@ -1,5 +1,6 @@
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
 
@@ -18,6 +19,7 @@ public class MovementAction extends AbstractAction {
 				
 		Player p = comp.getPlayer();
 		Menu m = comp.getMenu();
+		Menu s = comp.getSubMenu();
 		Projectile projectile;
 		
 		if(cmd.equalsIgnoreCase("W") && p != null) {
@@ -46,16 +48,34 @@ public class MovementAction extends AbstractAction {
 			t.start();
 		}
 		else if(cmd.equalsIgnoreCase("M") && m != null) {
-			Runnable r = new MenuRunnable(comp, m);
-			Thread t = new Thread(r);
-			t.start();
+			if (m.isDrawing()) {
+				m.stopDrawing();
+				comp.repaint(150,0,400,600);
+			}
+			else if (s.isDrawing()){
+				s.stopDrawing();
+				m.startDrawing();
+				comp.repaint(150,0,300,600);
+			}
+			else {
+				Runnable r = new MenuRunnable(comp, m);
+				Thread t = new Thread(r);
+				t.start();
+			}
 		}
 		else if(cmd.equalsIgnoreCase("Enter") && m != null) {
 			if (m.isDrawing()) {
 				int sel = m.getSelected();
 				switch (sel) {
 					case 0:	comp.toggleScore(); break;
-					case 1: break;
+					case 1: 
+						ArrayList<String>l = new ArrayList<String>();
+						l.add("Show Health");
+						l.add("Back");
+						s = new Menu(150, 0, 300, 600, l);
+						comp.addSubMenu(s);
+						s.startDrawing();
+						break;
 					case 2: break;
 					case 3: System.exit(0); break;
 					default: break;
@@ -63,16 +83,34 @@ public class MovementAction extends AbstractAction {
 				m.stopDrawing();
 				comp.repaint(0,0,600,600);
 			}
+			else if (s.isDrawing()) {
+				int sel = s.getSelected();
+				switch (sel) {
+					case 0:	comp.toggleHealth(); break;
+					case 1: break;
+					default: break;
+				}
+				s.stopDrawing();
+				m.startDrawing();
+			}
 		}
 		else if(cmd.equalsIgnoreCase("Up") && m != null) {
 			if (m.isDrawing()) {
 				m.decrementSelection();
-				comp.repaint(150,0,400,600);
+				comp.repaint(150,0,300,600);
+			}
+			if (s.isDrawing()) {
+				s.decrementSelection();
+				comp.repaint(150,0,300,600);
 			}
 		}
 		else if(cmd.equalsIgnoreCase("Down") && m != null) {
 			if (m.isDrawing()) {
 				m.incrementSelection();
+				comp.repaint(150,0,400,600);
+			}
+			if (s.isDrawing()) {
+				s.incrementSelection();
 				comp.repaint(150,0,400,600);
 			}
 		}
