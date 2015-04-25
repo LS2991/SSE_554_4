@@ -76,15 +76,17 @@ public class GameComponent extends JPanel{
 			g2.drawString("Score : " + Integer.toString(player.getScore()), 20, 502);
 		}
 		if (showHealth) {
-			int h = player.health;
-			int max = player.maxHealth;
-			double perc = Math.min(50,(((double)h/(double)max)*50));
-			perc = Math.max(0,perc);
+			if (player != null) {
+				int h = player.health;
+				int max = player.maxHealth;
+				double perc = Math.min(50,(((double)h/(double)max)*50));
+				perc = Math.max(0,perc);
 			
-			g2.setColor(Color.BLACK);
-			g2.fillRect(524, 20, 54, 18);
-			g2.setColor(Color.BLUE);
-			g2.fillRect(526, 22, ((int)perc), 14);
+				g2.setColor(Color.BLACK);
+				g2.fillRect(524, 20, 54, 18);
+				g2.setColor(Color.BLUE);
+				g2.fillRect(526, 22, ((int)perc), 14);
+			}
 		}
 		
 		if (menu != null) {
