@@ -42,7 +42,7 @@ public class ObjectRunnable implements Runnable {
 						if(object.intersects(comp.getProjectiles().get(i).getShape()))
 						{
 							comp.getProjectiles().remove(i);
-							collision = true;
+							object.health--;
 							break;
 						}
 					}
@@ -59,8 +59,11 @@ public class ObjectRunnable implements Runnable {
 						playerhit = false;
 						break;
 					}
-					if(collision)
+					if(object.health==0)
+					{
+						collision = true;
 						break;
+					}
 					//comp.repaint(prevX, prevY, object.getXSize(), object.getYSize());
 					//comp.repaint((int) object.getXPos(), (int) object.getYPos(), object.getXSize(), object.getYSize());
 					comp.repaint();

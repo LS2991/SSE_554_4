@@ -14,6 +14,7 @@ public class Object {
 	private int dX = 1, dY = 1;
 	private static final int xSize = 15, ySize = 15;
 	private int side;
+	public int health;
 	
 	public Object(Rectangle2D environment) {
 		side = (int) (Math.random()*3);
@@ -100,6 +101,10 @@ public class Object {
 		g2.setColor(Color.RED);
 		g2.fill(new Ellipse2D.Double(xPos, yPos, xSize, ySize));
 		
+	}
+	public void setSpeed(int speed) {
+		this.dX = speed;
+		this.dY = speed;
 	}
 	
 	public double getXPos() {
