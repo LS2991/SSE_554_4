@@ -112,6 +112,7 @@ public class EnvironmentFrame extends JFrame implements ActionListener, Observer
 					if (comp.gamemode == null) {
 						addPlayer();
 						addObjects();
+						comp.toggleShots();
 						comp.gamemode = "eff";
 					}
 				}
