@@ -11,6 +11,7 @@ public class SmallerObjectRunnable implements Runnable {
 
 	public SmallerObjectRunnable(GameComponent comp, double xpos, double ypos, int side, int num) {
 		object = new SmallerObject(comp.getBounds(),xpos,ypos,side,num);
+		object.setSpeed(comp.difficulty+1);
 		comp.addSmallerObject(object);
 		comp.paint(comp.getGraphics());
 		objects = comp.getSmallerObjects();
@@ -57,6 +58,8 @@ public class SmallerObjectRunnable implements Runnable {
 						comp.getPlayer().health = comp.getPlayer().health-1;
 						System.out.println(comp.getPlayer().health);
 						playerhit = false;
+						if (comp.getPlayer().health <= 0)
+							comp.gameEnded = true;
 						break;
 					}
 					if(collision)

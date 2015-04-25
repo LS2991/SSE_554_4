@@ -157,16 +157,7 @@ public class MovementAction extends AbstractAction {
 	
 	public void restartGame(ActionEvent e) {
 		GameComponent comp = (GameComponent) e.getSource();
-		Player p = comp.getPlayer();
-		Menu m = comp.getMenu();
-		Menu s = comp.getSubMenu();
-		
-		comp.shots = 20;
-		comp.gameEnded = false;
-		p.resetScore();
-		p.health = p.maxHealth;
-		comp.changeObjectSpeeds();
-		s.stopDrawing();
+		comp.restartGame();
 	}
 	public void endGame(ActionEvent e) {
 		GameComponent comp = (GameComponent) e.getSource();

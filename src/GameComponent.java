@@ -31,6 +31,8 @@ public class GameComponent extends JPanel{
 	public String gamemode;
 	public int smalldestroyed = 0;
 	public int difficulty = 0;
+	public int highScore = 0;
+	public double efficiency = 0;
 	
 	public void addPlayer(Player p) {
 		player = p;
@@ -124,10 +126,54 @@ public class GameComponent extends JPanel{
 				g2.drawString("Press m to bring up the menu.", 135, 300);
 				f = new Font("Calibri", Font.BOLD, 36);
 				g2.setFont(f);
-				if (gamemode == "eff")
-					g2.drawString("Efficiency: %" + Double.toString(100*(double)player.getScore()/(double)20.0), 165, 340);
-				else
-					g2.drawString("Score: " + Integer.toString(player.getScore()), 215, 340);
+				if (gamemode == "eff") {
+					efficiency = 100*(double)player.getScore()/(double)20.0;
+					switch (difficulty) {
+					case 0:
+						if (player.getScore() == savedgame.getEfficiencyEasy())
+							g2.drawString("Efficiency: " + Double.toString(efficiency) +"%", 165, 340);
+						else
+							g2.drawString("Efficiency: " + Double.toString(player.getScore()) +"% HighScore: " + savedgame.getEfficiencyEasy() +"%", 45, 340);
+						break;
+					case 1:
+						if (player.getScore() == savedgame.getEfficiencyMedium())
+							g2.drawString("Efficiency: " + Double.toString(efficiency) +"%", 165, 340);
+						else
+							g2.drawString("Efficiency: " + Integer.toString(player.getScore()) +"% HighScore: " + savedgame.getEfficiencyMedium() +"%", 45, 340);
+						break;
+					case 2:
+						if (player.getScore() == savedgame.getEfficiencyHard())
+							g2.drawString("Efficiency: " + Double.toString(efficiency) +"%", 165, 340);
+						else
+							g2.drawString("Efficiency: " + Integer.toString(player.getScore()) +"% HighScore: " + savedgame.getEfficiencyHard() +"%", 45, 340);
+						break;
+					default: break;
+					}
+					
+				}
+				else {
+					switch (difficulty) {
+					case 0:
+						if (player.getScore() == savedgame.getEndlessEasy())
+							g2.drawString("HighScore: " + Integer.toString(player.getScore()), 215, 340);
+						else
+							g2.drawString("Score: " + Integer.toString(player.getScore()) + " HighScore: " + Integer.toString(savedgame.getEndlessEasy()), 45, 340);
+						break;
+					case 1:
+						if (player.getScore() == savedgame.getEndlessMedium())
+							g2.drawString("HighScore: " + Integer.toString(player.getScore()), 215, 340);
+						else
+							g2.drawString("Score: " + Integer.toString(player.getScore()) + " HighScore: " + Integer.toString(savedgame.getEndlessMedium()), 45, 340);
+						break;
+					case 2:
+						if (player.getScore() == savedgame.getEndlessHard())
+							g2.drawString("HighScore: " + Integer.toString(player.getScore()), 215, 340);
+						else
+							g2.drawString("Score: " + Integer.toString(player.getScore()) + " HighScore: " + Integer.toString(savedgame.getEndlessHard()), 45, 340);
+						break;
+					default: break;
+					}
+				}
 			}
 		}
 		if (menu != null) {
@@ -211,5 +257,21 @@ public class GameComponent extends JPanel{
 		for (int i = 0; i < smallobjects.size(); i++) {
 			smallobjects.get(i).setSpeed(difficulty+1);
 		}
+	}
+	public void updateObjectHealth() {
+		for (int i = 0; i < objects.size(); i++) {
+			objects.get(i).updateHealth(difficulty+1);
+		}
+	}
+	public void restartGame() {
+		Player p = getPlayer();
+		
+		shots = 20;
+		gameEnded = false;
+		p.resetScore();
+		p.health = p.maxHealth;
+		changeObjectSpeeds();
+		submenu.stopDrawing();
+		menu.stopDrawing();
 	}
 }

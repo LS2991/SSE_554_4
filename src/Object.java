@@ -107,6 +107,10 @@ public class Object {
 		this.dY = speed;
 	}
 	
+	public void updateHealth(int amount) {
+		this.health = amount;
+	}
+	
 	public double getXPos() {
 		return xPos;
 	}

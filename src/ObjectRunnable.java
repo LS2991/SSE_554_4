@@ -11,14 +11,16 @@ public class ObjectRunnable implements Runnable {
 
 	public ObjectRunnable(GameComponent comp) {
 		object = new Object(comp.getBounds());
-		object.health = comp.difficulty+1;
+		object.setSpeed(comp.difficulty+1);
+		if (comp.gamemode == "end")
+			object.health = comp.difficulty+1;
 		comp.addObject(object);
 		comp.paint(comp.getGraphics());
 		objects = comp.getObjects();
 		
 		this.comp = comp;
 	}
-
+	
 	public void run() {
 		
 //		Thread t = new Thread(new Runnable() {
@@ -58,6 +60,8 @@ public class ObjectRunnable implements Runnable {
 						comp.getPlayer().health = comp.getPlayer().health-1;
 						System.out.println(comp.getPlayer().health);
 						playerhit = false;
+						if (comp.getPlayer().health <= 0)
+							comp.gameEnded = true;
 						break;
 					}
 					if(object.health==0)
