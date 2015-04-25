@@ -169,7 +169,42 @@ public class MovementAction extends AbstractAction {
 	public void endGame(ActionEvent e) {
 		GameComponent comp = (GameComponent) e.getSource();
 		Player p = comp.getPlayer();
+		SaveFile save = comp.getSaveFile();
 		
 		comp.gameEnded = true;
+		if (comp.gamemode == "eff") {
+			double eff = (100*(double)p.getScore()/(double)20.0); 
+			switch (comp.difficulty) {
+			case 1:
+				if (eff > save.getEfficiencyEasy())
+					save.setEfficiencyEasy(eff);
+				break;
+			case 2:
+				if (eff > save.getEfficiencyMedium())
+					save.setEfficiencyMedium(eff);
+				break;	
+			case 3:
+				if (eff > save.getEfficiencyHard())
+					save.setEfficiencyHard(eff);
+				break;
+			}
+		}
+		if (comp.gamemode == "end") {
+			int score = p.getScore();
+			switch (comp.difficulty) {
+			case 1:
+				if (score > save.getEndlessEasy())
+					save.setEndlessEasy(score);
+				break;
+			case 2:
+				if (score > save.getEndlessMedium())
+					save.setEndlessMedium(score);
+				break;	
+			case 3:
+				if (score > save.getEndlessHard())
+					save.setEndlessHard(score);
+				break;
+			}
+		}
 	}
 }
