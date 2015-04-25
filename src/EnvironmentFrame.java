@@ -70,14 +70,15 @@ public class EnvironmentFrame extends JFrame implements ActionListener, Observer
 	}
 	
 	public void addPlayer() {
+		comp.addSaveFile();
+		comp.getSaveFile().print();
 		Player player = new Player(comp.getBounds());
 //		comp.addPlayer(player);
 //		comp.paint(comp.getGraphics());
 		Runnable r = new PlayerRunnable(comp, player);
 		Thread t = new Thread(r);
 		t.start();
-		comp.addSaveFile();
-		comp.getSaveFile().print();
+
 	}
 	
 	public void addObjects() {

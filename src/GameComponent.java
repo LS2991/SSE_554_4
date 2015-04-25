@@ -26,6 +26,7 @@ public class GameComponent extends JPanel{
 	private boolean showScore = false;
 	private boolean showHealth = true;
 	public String gamemode;
+	public int smalldestroyed = 0;
 	
 	public void addPlayer(Player p) {
 		player = p;

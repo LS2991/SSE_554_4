@@ -74,7 +74,14 @@ public class SmallerObjectRunnable implements Runnable {
 		if(collision)
 		{
 			comp.getPlayer().incrementScore();
+			comp.smalldestroyed++;
 			objects.remove(object);
+			if(comp.smalldestroyed != 0 && comp.smalldestroyed%2==0)
+			{
+				Runnable r = new ObjectRunnable(comp);
+				Thread t = new Thread(r);
+				t.start();
+			}
 			play = false;
 			break;
 		}
