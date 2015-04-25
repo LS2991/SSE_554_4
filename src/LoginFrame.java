@@ -200,7 +200,7 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 						showSaveFileDialog();
 					}
 					
-					else if(!(new File((path = br.readLine())).exists())) {
+					else if(!(new File((path)).exists())) {
 						JOptionPane.showMessageDialog(this, "Directory does not exist. Please select a valid directory.");
 						showSaveFileDialog();
 					}
