@@ -26,6 +26,7 @@ public class GameComponent extends JPanel{
 	private boolean showScore = true;
 	private boolean showHealth = true;
 	private boolean showShots = false;
+	public boolean gameEnded = false;
 	public int shots = 20;
 	public String gamemode;
 	public int difficulty = 1;
@@ -63,50 +64,71 @@ public class GameComponent extends JPanel{
 //		for(Player p : players) {
 //			g2.fill(p.getShape());
 //		}
-		if(player != null)
-			player.paintPlayer(g2);
-		
-		if(!objects.isEmpty())
-			for(Object obj : objects)
-				obj.paintObject(g2);
-		
-		if(!smallobjects.isEmpty())
-			for(SmallerObject obj : smallobjects)
-				obj.paintObject(g2);
+		if (!gameEnded) {
+			if(player != null)
+				player.paintPlayer(g2);
+			
+			if(!objects.isEmpty())
+				for(Object obj : objects)
+					obj.paintObject(g2);
+			
+			if(!smallobjects.isEmpty())
+				for(SmallerObject obj : smallobjects)
+					obj.paintObject(g2);
+					
+			if(!projectiles.isEmpty()) { 
+				for(Projectile projectile : projectiles)
+					projectile.paintProjectile(g2);
+			}
+			
+			if (showScore) {
+				if (player != null) {
+					Font f = new Font("Calibri", Font.BOLD, 16);
+					g2.setFont(f);
+					g2.setColor(Color.BLACK);
+					g2.drawString("Score : " + Integer.toString(player.getScore()), 20, 502);
+				}
+			}
+			if (showHealth) {
+				if (player != null) {
+					int h = player.health;
+					int max = player.maxHealth;
+					double perc = Math.min(50,(((double)h/(double)max)*50));
+					perc = Math.max(0,perc);
 				
-		if(!projectiles.isEmpty()) { 
-			for(Projectile projectile : projectiles)
-				projectile.paintProjectile(g2);
-		}
-		
-		if (showScore) {
-			if (player != null) {
+					g2.setColor(Color.BLACK);
+					g2.fillRect(524, 20, 54, 18);
+					g2.setColor(Color.BLUE);
+					g2.fillRect(526, 22, ((int)perc), 14);
+				}
+			}
+			if (showShots) {
 				Font f = new Font("Calibri", Font.BOLD, 16);
 				g2.setFont(f);
 				g2.setColor(Color.BLACK);
-				g2.drawString("Score : " + Integer.toString(player.getScore()), 20, 502);
+				g2.drawString("Shots remaining : " + Integer.toString(shots), 440, 502);
 			}
 		}
-		if (showHealth) {
+		else {
 			if (player != null) {
-				int h = player.health;
-				int max = player.maxHealth;
-				double perc = Math.min(50,(((double)h/(double)max)*50));
-				perc = Math.max(0,perc);
-			
-				g2.setColor(Color.BLACK);
-				g2.fillRect(524, 20, 54, 18);
-				g2.setColor(Color.BLUE);
-				g2.fillRect(526, 22, ((int)perc), 14);
+				Color rectColor = new Color(0f, 0f, 0f, 0.6f);
+				Font f = new Font("Calibri", Font.BOLD, 44);
+				g2.setColor(rectColor);
+				g2.fillRect(0, 210, 600, 150);
+				g2.setFont(f);
+				g2.setColor(Color.WHITE);
+				g2.drawString("GAME OVER", 165, 280);
+				f = new Font("Calibri", Font.BOLD, 24);
+				g2.setFont(f);
+				g2.drawString("Press m to bring up the menu.", 135, 300);
+				f = new Font("Calibri", Font.BOLD, 36);
+				g2.setFont(f);
+				if (gamemode == "eff")
+					g2.drawString("Efficiency: %" + Double.toString(100*(double)player.getScore()/(double)20.0), 165, 340);
+				else
+					g2.drawString("Score: " + Integer.toString(player.getScore()), 215, 340);
 			}
 		}
-		if (showShots) {
-			Font f = new Font("Calibri", Font.BOLD, 16);
-			g2.setFont(f);
-			g2.setColor(Color.BLACK);
-			g2.drawString("Shots remaining : " + Integer.toString(shots), 440, 502);
-		}
-		
 		if (menu != null) {
 			menu.paintMenu(g2);
 		}

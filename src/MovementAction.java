@@ -42,14 +42,17 @@ public class MovementAction extends AbstractAction {
 		}
 		
 		else if(cmd.equalsIgnoreCase("Space") && p != null) {
-			Runnable r = new ProjectileRunnable(comp, p);
-			Thread t = new Thread(r);
-			t.start();
+			if (!comp.gameEnded) {
+				Runnable r = new ProjectileRunnable(comp, p);
+				Thread t = new Thread(r);
+				t.start();
 			
-			if (comp.gamemode == "eff")
-				comp.shots--;
-			if (comp.shots < 0) {
-				// END GAME
+				if (comp.gamemode == "eff")
+					comp.shots--;
+				if (comp.shots <= 0) {
+					// END GAME and update scores
+					endGame(e);
+				}
 			}
 		}
 		else if(cmd.equalsIgnoreCase("M") && m != null) {
@@ -158,9 +161,15 @@ public class MovementAction extends AbstractAction {
 		Menu s = comp.getSubMenu();
 		
 		comp.shots = 20;
+		comp.gameEnded = false;
 		p.resetScore();
 		p.health = p.maxHealth;
 		s.stopDrawing();
 	}
-
+	public void endGame(ActionEvent e) {
+		GameComponent comp = (GameComponent) e.getSource();
+		Player p = comp.getPlayer();
+		
+		comp.gameEnded = true;
+	}
 }
