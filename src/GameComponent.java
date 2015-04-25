@@ -29,7 +29,11 @@ public class GameComponent extends JPanel{
 	public boolean gameEnded = false;
 	public int shots = 20;
 	public String gamemode;
+<<<<<<< HEAD
+	public int smalldestroyed = 0;
+=======
 	public int difficulty = 1;
+>>>>>>> origin/master
 	
 	public void addPlayer(Player p) {
 		player = p;
