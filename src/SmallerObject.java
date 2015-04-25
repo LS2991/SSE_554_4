@@ -79,6 +79,10 @@ public class SmallerObject {
 			}
 		}
 	}
+	public void setSpeed(int speed) {
+		this.dX = speed;
+		this.dY = speed;
+	}
 	
 	public Ellipse2D getShape() {
 		return new Ellipse2D.Double(xPos, yPos, xSize, ySize);

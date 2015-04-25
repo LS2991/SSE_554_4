@@ -30,7 +30,7 @@ public class GameComponent extends JPanel{
 	public int shots = 20;
 	public String gamemode;
 	public int smalldestroyed = 0;
-	public int difficulty = 1;
+	public int difficulty = 0;
 	
 	public void addPlayer(Player p) {
 		player = p;
@@ -204,5 +204,20 @@ public class GameComponent extends JPanel{
 	public void toggleShots() {
 		showShots = !showShots;
 	}
-	
+	public void changeObjectSpeeds() {
+		for (int i = 0; i < objects.size(); i++) {
+			objects.get(i).setSpeed(difficulty+1);
+		}
+		for (int i = 0; i < smallobjects.size(); i++) {
+			smallobjects.get(i).setSpeed(difficulty+1);
+		}
+	}
+	public void  changeObjectHealth() {
+		if (gamemode == "end") {
+			for (int i = 0; i < objects.size(); i++) {
+				objects.get(i).maxHealth = difficulty+1;
+			}
+		}
+	}
+	}
 }

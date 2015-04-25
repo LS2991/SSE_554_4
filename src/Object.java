@@ -14,7 +14,7 @@ public class Object {
 	private int dX = 1, dY = 1;
 	private static final int xSize = 15, ySize = 15;
 	private int side;
-	public int health;
+	public int health = 1;
 	
 	public Object(Rectangle2D environment) {
 		side = (int) (Math.random()*3);

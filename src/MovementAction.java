@@ -1,5 +1,6 @@
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
@@ -164,6 +165,7 @@ public class MovementAction extends AbstractAction {
 		comp.gameEnded = false;
 		p.resetScore();
 		p.health = p.maxHealth;
+		comp.changeObjectSpeeds();
 		s.stopDrawing();
 	}
 	public void endGame(ActionEvent e) {
@@ -205,6 +207,13 @@ public class MovementAction extends AbstractAction {
 					save.setEndlessHard(score);
 				break;
 			}
+		}
+		
+		try {
+			save.Savegame();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
 }
