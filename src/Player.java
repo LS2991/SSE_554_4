@@ -1,12 +1,13 @@
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.geom.Ellipse2D.Double;
+import java.awt.geom.Rectangle2D;
 
 
 public class Player {
 	
 	private double xPos, yPos;
+	int health = 3;
 	private int dX = 3, dY = 3, score = 0;
 	private static final int xSize = 15, ySize = 15;
 	public int health = 100;
@@ -35,7 +36,7 @@ public class Player {
 			yPos += dY;
 	}
 	
-	public Ellipse2D getShape() {
+	public Double getShape() {
 		return new Ellipse2D.Double(xPos, yPos, xSize, ySize);
 	}
 	
