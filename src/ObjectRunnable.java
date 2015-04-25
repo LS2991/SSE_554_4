@@ -7,7 +7,6 @@ public class ObjectRunnable implements Runnable {
 	private ArrayList<Object> objects;
 	private Object object;
 	boolean play = true, collision = false, playerhit= false;
-	int health;
 
 	public ObjectRunnable(GameComponent comp) {
 		object = new Object(comp.getBounds());
