@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 
+@SuppressWarnings("serial")
 public class EnvironmentFrame extends JFrame implements ActionListener, Observer {
 
 	public GameComponent comp;

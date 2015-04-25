@@ -7,7 +7,7 @@ public class Projectile {
 
 	private double xPos, yPos;
 	private Player player;
-	private int dX = 1;
+	private int dX = 5;
 	private static final int xSize = 5, ySize = 2;
 	
 	public Projectile(Rectangle2D environment, Player p) {

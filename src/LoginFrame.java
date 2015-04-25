@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
+@SuppressWarnings("serial")
 public class LoginFrame extends JPanel implements ActionListener, Subject{
 	
 	JButton existingUser, newUser;
@@ -196,6 +197,11 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 					
 					if(!directoryFile.exists()) {
 						JOptionPane.showMessageDialog(this, "No save files exist. Please select a save directory.");
+						showSaveFileDialog();
+					}
+					
+					else if(!(new File((path = br.readLine())).exists())) {
+						JOptionPane.showMessageDialog(this, "Directory does not exist. Please select a valid directory.");
 						showSaveFileDialog();
 					}
 					
