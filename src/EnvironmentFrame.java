@@ -15,7 +15,6 @@ import javax.swing.KeyStroke;
 
 @SuppressWarnings("serial")
 public class EnvironmentFrame extends JFrame implements ActionListener, Observer {
-
 	public GameComponent comp;
 	public LoginFrame login;
 	Container contentPane;
@@ -58,11 +57,8 @@ public class EnvironmentFrame extends JFrame implements ActionListener, Observer
 		am.put("M", new MovementAction("M"));
 		am.put("Enter", new MovementAction("Enter"));
 		
-		
 		//add(comp, BorderLayout.CENTER);
 		add(login, BorderLayout.CENTER);
-		
-		
 		
 		pack();
 	}
@@ -111,14 +107,21 @@ public class EnvironmentFrame extends JFrame implements ActionListener, Observer
 			setPane(comp);
 			
 			JPanel buttonPanel = new JPanel();
-			
-			addButton(buttonPanel, "Start", new ActionListener() {
-				boolean started = false;
+			addButton(buttonPanel, "Start Efficiency Mode", new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if (!started) {
+					if (comp.gamemode == null) {
 						addPlayer();
 						addObjects();
-						started = true;
+						comp.gamemode = "eff";
+					}
+				}
+			});
+			addButton(buttonPanel, "Start Endless Mode", new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if (comp.gamemode == null) {
+						addPlayer();
+						addObjects();
+						comp.gamemode = "end";
 					}
 				}
 			});
@@ -128,7 +131,6 @@ public class EnvironmentFrame extends JFrame implements ActionListener, Observer
 	}
 	
 public void setPane(JPanel panel) {
-        
         contentPane.removeAll();
         contentPane.add(panel, BorderLayout.CENTER);
         panel.setFocusable(true);
