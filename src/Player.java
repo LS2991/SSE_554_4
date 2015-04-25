@@ -7,7 +7,6 @@ import java.awt.geom.Rectangle2D;
 public class Player {
 	
 	private double xPos, yPos;
-	int health = 3;
 	private int dX = 3, dY = 3, score = 0;
 	private static final int xSize = 15, ySize = 15;
 	public int health = 100;

@@ -17,6 +17,7 @@ public class GameComponent extends JPanel{
 	private Projectile projectile;
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	private Object object;
+	private SaveFile savedgame = new SaveFile();
 	private ArrayList<Object> objects = new ArrayList<Object>();
 	private ArrayList<SmallerObject> smallobjects = new ArrayList<SmallerObject>();
 	private Menu menu = new Menu();
@@ -108,6 +109,11 @@ public class GameComponent extends JPanel{
 	{
 		return smallobjects;
 	}
+	
+	public SaveFile getSaveFile() 
+	{
+		return savedgame;	
+	}
 
 	/////////////////////////////////////////
 	public void startDrawingMenu() {
@@ -127,7 +133,6 @@ public class GameComponent extends JPanel{
 	public void toggleScore() {
 		showScore = !showScore;
 	}
-
 
 
 }

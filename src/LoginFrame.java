@@ -31,6 +31,7 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 	File usersFile, directoryFile;
 	int shift = 3;
 	public boolean authenticated = false;
+	public static String savedfilename;
 	CaesarCipher cc;
 	ArrayList<Observer> observers;
 	
@@ -94,7 +95,6 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 		
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		File user;
@@ -140,6 +140,7 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 						else {
 							while(name != null) {
 								if(name.contains(username.getText())) {
+									savedfilename = username.getText();
 									user = new File(path + "\\" + username.getText() + ".txt");
 									fr = new FileReader(user);
 									br = new BufferedReader(fr);
@@ -211,6 +212,20 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 						bw.append("Username " + username.getText());
 						bw.newLine();
 						bw.append("Password " + encrypted);
+						bw.newLine();
+						bw.append("Color Black");
+						bw.newLine();
+						bw.append("Endless_easy 0");
+						bw.newLine();
+						bw.append("Endless_medium 0");
+						bw.newLine();
+						bw.append("Endless_hard 0");
+						bw.newLine();
+						bw.append("Efficiency_easy 0");
+						bw.newLine();
+						bw.append("Efficiency_medium 0");
+						bw.newLine();
+						bw.append("Efficiency_hard 0");
 						bw.close();
 						
 						
@@ -266,23 +281,19 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 		return newUser;
 	}
 
-	@Override
 	public void registerObserver(Observer o) {
 		observers.add(o);
 	}
 
-	@Override
 	public void removeObserver(Observer o) {
 		observers.remove(o);
 	}
 
-	@Override
 	public void notifyObservers() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void notifyObserver(boolean authenticated) {
 		for(int x = 0; x < observers.size(); x++) {
 			observers.get(x).update(authenticated);

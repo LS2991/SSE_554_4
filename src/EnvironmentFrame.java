@@ -79,6 +79,7 @@ public class EnvironmentFrame extends JFrame implements ActionListener, Observer
 		Runnable r = new PlayerRunnable(comp, player);
 		Thread t = new Thread(r);
 		t.start();
+		comp.getSaveFile().print();
 	}
 	
 	public void addObjects() {
@@ -100,7 +101,6 @@ public class EnvironmentFrame extends JFrame implements ActionListener, Observer
 		return comp;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("frame");
 		
@@ -136,7 +136,6 @@ public void setPane(JPanel panel) {
         setVisible(true);
 	}
 
-@Override
 public void update(boolean authenticated) {
 	this.authenticated = authenticated;
 }
