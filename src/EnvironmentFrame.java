@@ -80,6 +80,7 @@ public class EnvironmentFrame extends JFrame implements ActionListener, Observer
 		Runnable r = new PlayerRunnable(comp, player);
 		Thread t = new Thread(r);
 		t.start();
+		comp.addSaveFile();
 		comp.getSaveFile().print();
 	}
 	

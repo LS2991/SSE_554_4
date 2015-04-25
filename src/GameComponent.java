@@ -18,7 +18,7 @@ public class GameComponent extends JPanel{
 	private Projectile projectile;
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	private Object object;
-	private SaveFile savedgame = new SaveFile();
+	private SaveFile savedgame;
 	private ArrayList<Object> objects = new ArrayList<Object>();
 	private ArrayList<SmallerObject> smallobjects = new ArrayList<SmallerObject>();
 	private Menu menu = new Menu();
@@ -46,6 +46,11 @@ public class GameComponent extends JPanel{
 	public void addSmallerObject(SmallerObject smallobject) 
 	{
 		smallobjects.add(smallobject);
+	}
+	
+	public void addSaveFile()
+	{
+		savedgame = new SaveFile();
 	}
 	
 	public void paintComponent(Graphics g) {
