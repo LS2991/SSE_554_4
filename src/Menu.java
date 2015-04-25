@@ -7,12 +7,14 @@ public class Menu {
 	private int xPos, yPos, width, height, selected, maxOptions;
 	private ArrayList<String> menuList = new ArrayList<String>();
 	private boolean drawing = false;
+	public int type;
 	
 	public Menu() {
 		xPos = 150;
 		yPos = 0;
 		width = 300;
 		height = 600;
+		type = 0;
 		
 		createMenuList();
 	}
@@ -23,6 +25,7 @@ public class Menu {
 		width = w;
 		height = h;
 		selected = 0;
+		type = 0;
 		
 		menuList = list;
 		maxOptions = menuList.size();
@@ -30,8 +33,10 @@ public class Menu {
 	
 	private void createMenuList() {
 		menuList.add("Score");
+		menuList.add("Difficulty");
 		menuList.add("Options");
 		menuList.add("Exit Menu");
+		menuList.add("Restart Game");
 		menuList.add("Exit Game");
 		selected = 0;
 		

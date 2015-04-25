@@ -23,10 +23,16 @@ public class GameComponent extends JPanel{
 	private ArrayList<SmallerObject> smallobjects = new ArrayList<SmallerObject>();
 	private Menu menu = new Menu();
 	private Menu submenu = new Menu();
-	private boolean showScore = false;
+	private boolean showScore = true;
 	private boolean showHealth = true;
+	private boolean showShots = false;
+	public int shots = 20;
 	public String gamemode;
+<<<<<<< HEAD
 	public int smalldestroyed = 0;
+=======
+	public int difficulty = 1;
+>>>>>>> origin/master
 	
 	public void addPlayer(Player p) {
 		player = p;
@@ -78,10 +84,12 @@ public class GameComponent extends JPanel{
 		}
 		
 		if (showScore) {
-			Font f = new Font("Calibri", Font.BOLD, 16);
-			g2.setFont(f);
-			g2.setColor(Color.BLACK);
-			g2.drawString("Score : " + Integer.toString(player.getScore()), 20, 502);
+			if (player != null) {
+				Font f = new Font("Calibri", Font.BOLD, 16);
+				g2.setFont(f);
+				g2.setColor(Color.BLACK);
+				g2.drawString("Score : " + Integer.toString(player.getScore()), 20, 502);
+			}
 		}
 		if (showHealth) {
 			if (player != null) {
@@ -95,6 +103,12 @@ public class GameComponent extends JPanel{
 				g2.setColor(Color.BLUE);
 				g2.fillRect(526, 22, ((int)perc), 14);
 			}
+		}
+		if (showShots) {
+			Font f = new Font("Calibri", Font.BOLD, 16);
+			g2.setFont(f);
+			g2.setColor(Color.BLACK);
+			g2.drawString("Shots remaining : " + Integer.toString(shots), 440, 502);
 		}
 		
 		if (menu != null) {
@@ -168,6 +182,8 @@ public class GameComponent extends JPanel{
 	public void toggleHealth() {
 		showHealth = !showHealth;
 	}
-
-
+	public void toggleShots() {
+		showShots = !showShots;
+	}
+	
 }

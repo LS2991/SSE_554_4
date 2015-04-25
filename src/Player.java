@@ -68,5 +68,8 @@ public class Player {
 	public void incrementScore() {
 		score ++;
 	}
+	public void resetScore() {
+		score = 0;
+	}
 	
 }
