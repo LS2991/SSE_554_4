@@ -168,40 +168,40 @@ public class MovementAction extends AbstractAction {
 		if (comp.gamemode == "eff") {
 			double eff = (100*(double)p.getScore()/(double)20.0); 
 			switch (comp.difficulty) {
-			case 1:
+			case 0:
 				if (eff > save.getEfficiencyEasy())
-					save.setEfficiencyEasy(eff);
+					comp.getSaveFile().setEfficiencyEasy(eff);
 				break;
-			case 2:
+			case 1:
 				if (eff > save.getEfficiencyMedium())
-					save.setEfficiencyMedium(eff);
+					comp.getSaveFile().setEfficiencyMedium(eff);
 				break;	
-			case 3:
+			case 2:
 				if (eff > save.getEfficiencyHard())
-					save.setEfficiencyHard(eff);
+					comp.getSaveFile().setEfficiencyHard(eff);
 				break;
 			}
 		}
 		if (comp.gamemode == "end") {
 			int score = p.getScore();
 			switch (comp.difficulty) {
-			case 1:
+			case 0:
 				if (score > save.getEndlessEasy())
-					save.setEndlessEasy(score);
+					comp.getSaveFile().setEndlessEasy(score);
 				break;
-			case 2:
+			case 1:
 				if (score > save.getEndlessMedium())
-					save.setEndlessMedium(score);
+					comp.getSaveFile().setEndlessMedium(score);
 				break;	
-			case 3:
+			case 2:
 				if (score > save.getEndlessHard())
-					save.setEndlessHard(score);
+					comp.getSaveFile().setEndlessHard(score);
 				break;
 			}
 		}
 		
 		try {
-			save.Savegame();
+			comp.getSaveFile().Savegame();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

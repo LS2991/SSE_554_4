@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 
-@SuppressWarnings("serial")
 public class GameComponent extends JPanel{
 	
 	private static final int defaultWidth = 600;
@@ -133,19 +132,19 @@ public class GameComponent extends JPanel{
 						if (player.getScore() == savedgame.getEfficiencyEasy())
 							g2.drawString("Efficiency: " + Double.toString(efficiency) +"%", 165, 340);
 						else
-							g2.drawString("Efficiency: " + Double.toString(player.getScore()) +"% HighScore: " + savedgame.getEfficiencyEasy() +"%", 45, 340);
+							g2.drawString("Efficiency: " + Double.toString(efficiency) +"% HighScore: " + savedgame.getEfficiencyEasy() +"%", 45, 340);
 						break;
 					case 1:
 						if (player.getScore() == savedgame.getEfficiencyMedium())
 							g2.drawString("Efficiency: " + Double.toString(efficiency) +"%", 165, 340);
 						else
-							g2.drawString("Efficiency: " + Integer.toString(player.getScore()) +"% HighScore: " + savedgame.getEfficiencyMedium() +"%", 45, 340);
+							g2.drawString("Efficiency: " + Double.toString(efficiency) +"% HighScore: " + savedgame.getEfficiencyMedium() +"%", 45, 340);
 						break;
 					case 2:
 						if (player.getScore() == savedgame.getEfficiencyHard())
 							g2.drawString("Efficiency: " + Double.toString(efficiency) +"%", 165, 340);
 						else
-							g2.drawString("Efficiency: " + Integer.toString(player.getScore()) +"% HighScore: " + savedgame.getEfficiencyHard() +"%", 45, 340);
+							g2.drawString("Efficiency: " + Double.toString(efficiency) +"% HighScore: " + savedgame.getEfficiencyHard() +"%", 45, 340);
 						break;
 					default: break;
 					}
