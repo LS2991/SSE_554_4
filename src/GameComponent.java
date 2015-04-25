@@ -212,12 +212,4 @@ public class GameComponent extends JPanel{
 			smallobjects.get(i).setSpeed(difficulty+1);
 		}
 	}
-	public void  changeObjectHealth() {
-		if (gamemode == "end") {
-			for (int i = 0; i < objects.size(); i++) {
-				objects.get(i).maxHealth = difficulty+1;
-			}
-		}
-	}
-	}
 }
