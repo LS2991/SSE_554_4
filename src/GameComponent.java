@@ -20,8 +20,10 @@ public class GameComponent extends JPanel{
 	private ArrayList<Object> objects = new ArrayList<Object>();
 	private ArrayList<SmallerObject> smallobjects = new ArrayList<SmallerObject>();
 	private Menu menu = new Menu();
+	private Menu submenu = new Menu();
 	private boolean showScore = false;
-
+	private boolean showHealth = true;
+	
 	public void addPlayer(Player p) {
 		player = p;
 	}
@@ -66,15 +68,29 @@ public class GameComponent extends JPanel{
 				projectile.paintProjectile(g2);
 		}
 		
+		if (showScore) {
+			Font f = new Font("Calibri", Font.BOLD, 16);
+			g2.setFont(f);
+			g2.setColor(Color.BLACK);
+			g2.drawString("Score : " + Integer.toString(player.getScore()), 20, 502);
+		}
+		if (showHealth) {
+			int h = player.health;
+			int max = player.maxHealth;
+			double perc = Math.min(50,(((double)h/(double)max)*50));
+			perc = Math.max(0,perc);
+			
+			g2.setColor(Color.BLACK);
+			g2.fillRect(524, 20, 54, 18);
+			g2.setColor(Color.BLUE);
+			g2.fillRect(526, 22, ((int)perc), 14);
+		}
+		
 		if (menu != null) {
 			menu.paintMenu(g2);
-		
-			if (showScore) {
-				Font f = new Font("Calibri", Font.BOLD, 16);
-				g2.setFont(f);
-				g2.setColor(Color.BLACK);
-				g2.drawString("Score : " + Integer.toString(player.getScore()), 20, 502);
-			}
+		}
+		if (submenu != null) {
+			submenu.paintMenu(g2);
 		}
 	}
 	
@@ -124,8 +140,17 @@ public class GameComponent extends JPanel{
 	public void addMenu(Menu m) {
 		menu = m;
 	}
+	public Menu getSubMenu() {
+		return submenu;
+	}
+	public void addSubMenu(Menu m) {
+		submenu = m;
+	}
 	public void toggleScore() {
 		showScore = !showScore;
+	}
+	public void toggleHealth() {
+		showHealth = !showHealth;
 	}
 
 
