@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 C:\Users\Keith\Desktop
-=======
-C:\Users\Daimen\Documents\Test
->>>>>>> origin/master
