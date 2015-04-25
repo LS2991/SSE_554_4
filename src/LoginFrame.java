@@ -23,7 +23,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-@SuppressWarnings("serial")
 public class LoginFrame extends JPanel implements ActionListener, Subject{
 	
 	JButton existingUser, newUser;
