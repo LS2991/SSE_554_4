@@ -61,7 +61,10 @@ public class ObjectRunnable implements Runnable {
 						System.out.println(comp.getPlayer().health);
 						playerhit = false;
 						if (comp.getPlayer().health <= 0)
+						{
 							comp.gameEnded = true;
+							comp.endGame();
+						}
 						break;
 					}
 					if(object.health==0)

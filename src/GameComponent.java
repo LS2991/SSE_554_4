@@ -3,6 +3,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -183,6 +185,54 @@ public class GameComponent extends JPanel{
 		}
 	}
 	
+	public void endGame() {
+		Player p = getPlayer();
+		SaveFile save = getSaveFile();
+		
+		gameEnded = true;
+		if (gamemode == "eff") {
+			double eff = (100*(double)p.getScore()/(double)20.0); 
+			switch (difficulty) {
+			case 0:
+				if (eff > save.getEfficiencyEasy())
+					getSaveFile().setEfficiencyEasy(eff);
+				break;
+			case 1:
+				if (eff > save.getEfficiencyMedium())
+					getSaveFile().setEfficiencyMedium(eff);
+				break;	
+			case 2:
+				if (eff > save.getEfficiencyHard())
+					getSaveFile().setEfficiencyHard(eff);
+				break;
+			}
+		}
+		if (gamemode.equals("end")) {
+			int score = p.getScore();
+			switch (difficulty) {
+			case 0:
+				if (score > save.getEndlessEasy())
+					getSaveFile().setEndlessEasy(score);
+				break;
+			case 1:
+				if (score > save.getEndlessMedium())
+					getSaveFile().setEndlessMedium(score);
+				break;	
+			case 2:
+				if (score > save.getEndlessHard())
+					getSaveFile().setEndlessHard(score);
+				break;
+			}
+		}
+		
+		try {
+			getSaveFile().Savegame();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+		
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(defaultWidth, defaultHeight);
