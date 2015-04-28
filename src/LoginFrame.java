@@ -121,11 +121,11 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 					
 					if(!directoryFile.exists()) {
 						JOptionPane.showMessageDialog(this, "No save files exist. Please select a save directory.");
-						showSaveFileDialog();
+						path = showSaveFileDialog();
 					}
 					else if(!(new File((path = br.readLine())).exists())) {
 						JOptionPane.showMessageDialog(this, "Directory does not exist. Please select a valid directory.");
-						showSaveFileDialog();
+						path = showSaveFileDialog();
 					}
 					
 					
@@ -135,7 +135,7 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 						br = new BufferedReader(fr);
 						//fScanner = new Scanner(usersFile);
 						if((name = br.readLine()) == null) {
-							JOptionPane.showMessageDialog(this, "Username does not exist. Please select new user.");
+							JOptionPane.showMessageDialog(this, "Username does not exist. Please select new user");
 						}
 						else {
 							while(name != null) {
@@ -176,13 +176,14 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 									name = br.readLine();
 							}
 							if(name == null){
-								JOptionPane.showMessageDialog(this, "Username does not exist. Please select new user2.");
+								JOptionPane.showMessageDialog(this, "Username does not exist. Please select new user.");
 							}
 							
 						}
 						br.close();
 					}
 					else {
+						System.out.println(authenticated);
 						JOptionPane.showMessageDialog(this, "Please enter username and password.");
 					}
 				}
@@ -196,12 +197,12 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 					
 					if(!directoryFile.exists()) {
 						JOptionPane.showMessageDialog(this, "No save files exist. Please select a save directory.");
-						showSaveFileDialog();
+						path = showSaveFileDialog();
 					}
 					
 					else if(!(new File((path)).exists())) {
 						JOptionPane.showMessageDialog(this, "Directory does not exist. Please select a valid directory.");
-						showSaveFileDialog();
+						path = showSaveFileDialog();
 					}
 					
 					if(!username.getText().equals("") && !password.getText().equals("")) {
@@ -257,7 +258,7 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 			}
 	}
 	
-	private void showSaveFileDialog() throws IOException {
+	private String showSaveFileDialog() throws IOException {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setDialogTitle("Please Specify Save Game Location");
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -276,6 +277,7 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 		}
 		//db.createTable();
 		//notifyDatabase(db);
+		return fileChooser.getSelectedFile().getPath();
 	}
 	
 	public JButton getExistingButton() {

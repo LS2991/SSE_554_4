@@ -104,7 +104,7 @@ public class EnvironmentFrame extends JFrame implements ActionListener, Observer
 		System.out.println("frame");
 		
 		String action = e.getActionCommand();
-		if(action.equals("existing")) {
+		if(action.equals("existing") && authenticated == true) {
 			setPane(comp);
 			
 			JPanel buttonPanel = new JPanel();
