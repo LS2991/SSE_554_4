@@ -52,7 +52,7 @@ public class MovementAction extends AbstractAction {
 					comp.shots--;
 				if (comp.shots <= 0) {
 					// END GAME and update scores
-					endGame(e);
+					comp.endGame();
 				}
 			}
 		}
@@ -158,53 +158,5 @@ public class MovementAction extends AbstractAction {
 	public void restartGame(ActionEvent e) {
 		GameComponent comp = (GameComponent) e.getSource();
 		comp.restartGame();
-	}
-	public void endGame(ActionEvent e) {
-		GameComponent comp = (GameComponent) e.getSource();
-		Player p = comp.getPlayer();
-		SaveFile save = comp.getSaveFile();
-		
-		comp.gameEnded = true;
-		if (comp.gamemode == "eff") {
-			double eff = (100*(double)p.getScore()/(double)20.0); 
-			switch (comp.difficulty) {
-			case 0:
-				if (eff > save.getEfficiencyEasy())
-					comp.getSaveFile().setEfficiencyEasy(eff);
-				break;
-			case 1:
-				if (eff > save.getEfficiencyMedium())
-					comp.getSaveFile().setEfficiencyMedium(eff);
-				break;	
-			case 2:
-				if (eff > save.getEfficiencyHard())
-					comp.getSaveFile().setEfficiencyHard(eff);
-				break;
-			}
-		}
-		if (comp.gamemode == "end") {
-			int score = p.getScore();
-			switch (comp.difficulty) {
-			case 0:
-				if (score > save.getEndlessEasy())
-					comp.getSaveFile().setEndlessEasy(score);
-				break;
-			case 1:
-				if (score > save.getEndlessMedium())
-					comp.getSaveFile().setEndlessMedium(score);
-				break;	
-			case 2:
-				if (score > save.getEndlessHard())
-					comp.getSaveFile().setEndlessHard(score);
-				break;
-			}
-		}
-		
-		try {
-			comp.getSaveFile().Savegame();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 	}
 }
