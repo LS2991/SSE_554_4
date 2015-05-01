@@ -15,10 +15,11 @@ import javax.swing.KeyStroke;
 
 @SuppressWarnings("serial")
 public class EnvironmentFrame extends JFrame implements ActionListener, Observer {
-	public GameComponent comp;
+	public static GameComponent comp;
 	public LoginFrame login;
 	Container contentPane;
 	JButton existingB, newB;
+	JPanel buttonPanel;
 	boolean authenticated = false;
 	public EnvironmentFrame() {
 		comp = new GameComponent();
@@ -104,10 +105,11 @@ public class EnvironmentFrame extends JFrame implements ActionListener, Observer
 		System.out.println("frame");
 		
 		String action = e.getActionCommand();
-		if(action.equals("existing") && authenticated == true) {
-			setPane(comp);
+		if(action.equals("existing")) {
+			//System.out.println(authenticated);
+			//setPane(comp);
 			
-			JPanel buttonPanel = new JPanel();
+			buttonPanel = new JPanel();
 			addButton(buttonPanel, "Start Efficiency Mode", new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if (comp.gamemode == null) {
@@ -144,6 +146,14 @@ public void setPane(JPanel panel) {
 
 public void update(boolean authenticated) {
 	this.authenticated = authenticated;
+}
+
+public GameComponent getComp() {
+	return comp;
+}
+
+public JPanel getButtonPanel() {
+	return buttonPanel;
 }
 
 }

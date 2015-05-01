@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -170,8 +171,14 @@ public class LoginFrame extends JPanel implements ActionListener, Subject{
 										contents = br.readLine();
 									}
 								}
-								if(authenticated == true)
+								if(authenticated == true) {
+									EnvironmentFrame eF = (EnvironmentFrame) observers.get(0);
+									GameComponent gC = eF.getComp();
+									eF.setPane(gC);
+									eF.add(eF.getButtonPanel(), BorderLayout.SOUTH);
 									break;
+								}
+									
 								else
 									name = br.readLine();
 							}
